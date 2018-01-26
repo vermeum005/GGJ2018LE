@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212240292388283276}
   - component: {fileID: 68737363009285622}
   m_Layer: 0
-  m_Name: PenLeft
+  m_Name: Pen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
