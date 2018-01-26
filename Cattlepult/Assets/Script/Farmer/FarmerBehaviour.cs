@@ -13,11 +13,7 @@ public class FarmerBehaviour : MonoBehaviour {
     private bool isInRightPen = false;
 
 	// Use this for initialization
-	void Start () {
-        /* select correct pen */
-        if (isInRightPen) pen = GameObject.Find("PenRight");
-        else pen = GameObject.Find("PenLeft");
-    }
+	void Start () {}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -28,9 +24,6 @@ public class FarmerBehaviour : MonoBehaviour {
 
         /* Downscale speed for easy of use */
         speed = maxSpeed / 100;
-
-//        Vector3 penPos = pen.transform.position;
-//        Vector3 penSize = pen.GetComponent<BoxCollider2D>().size;
 
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
