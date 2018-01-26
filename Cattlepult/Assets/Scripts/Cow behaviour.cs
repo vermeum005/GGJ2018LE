@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cowbehaviour : MonoBehaviour {
-    enum State { Idle, BreedingIdle, Running, PickUp, CattlePult};
+    enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, Breeding};
     // Use this for initialization
     private State state;
 	void Start () {
@@ -28,6 +28,9 @@ public class Cowbehaviour : MonoBehaviour {
                 break;
 
             case State.CattlePult:
+                break;
+
+            case State.Breeding:
                 break;
         }
 	}
