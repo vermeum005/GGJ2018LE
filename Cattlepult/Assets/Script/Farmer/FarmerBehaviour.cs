@@ -10,7 +10,7 @@ public class FarmerBehaviour : MonoBehaviour {
 
     [SerializeField]
     private float maxSpeed = 1;        //Speed at which the farmer moves
-    private bool isInRightPen = false;
+    //private bool isInRightPen = false;
 
 	// Use this for initialization
 	void Start () {}
