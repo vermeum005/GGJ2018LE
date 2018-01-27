@@ -237,6 +237,7 @@ public class CowBehaviour : MonoBehaviour
 
     public void setFlying()
     {
+        rend.enabled = true;
         state = State.inAir;
     }
 

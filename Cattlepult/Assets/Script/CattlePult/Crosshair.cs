@@ -6,16 +6,18 @@ public class Crosshair : MonoBehaviour {
 
     // Use this for initialization
     public GameObject cattlePult;
-    private bool active = true;
+    private bool active;
     private float speed;
     private Vector3 direction;
     public float maxSpeed = 2;
     private Renderer rend;
     private Vector3 startPos;
+
     void Start () {
         startPos = cattlePult.transform.position;
         this.transform.position = startPos;
         rend = GetComponent<Renderer>();
+        active = false;
         rend.enabled = false;
 	}
 	
@@ -27,15 +29,19 @@ public class Crosshair : MonoBehaviour {
             inputs();
         }
 	}
+
     public void activateCrosshair()
     {
         active = true;
         rend.enabled = true;
+        transform.position = new Vector3(0, 0, 0);
     }
+
     public Vector3 getPosition()
     {
         return transform.position;
     }
+
     void movement()
     {
         /* Downscale speed for easy of use */
@@ -51,11 +57,12 @@ public class Crosshair : MonoBehaviour {
 
         transform.position = tmpPos;
     }
+
     void inputs()
     {
+        if (!active) return;
         if (Input.GetButtonDown("Fire1"))
         {
-            //give location information to Jelle's code
             active = false;
             rend.enabled = false;
             cattlePult.GetComponent<CattlePult>().firePult(transform.position);
