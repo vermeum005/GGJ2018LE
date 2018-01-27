@@ -14,7 +14,7 @@ public class FarmerBehaviour : MonoBehaviour {
     private GameObject pickedUpCow;
 
     public GameObject cattlePult;
-    private bool aiming;
+    private bool aiming = false;
 
     private int bellRingTimer;
     private int bellRingTime = 120;
@@ -91,6 +91,7 @@ public class FarmerBehaviour : MonoBehaviour {
             }
         } 
     }
+
     public void OnTriggerStay2D(Collider2D other)
     {
         if (pickedUpCow != null && other.tag == "CattlePult")
@@ -101,6 +102,7 @@ public class FarmerBehaviour : MonoBehaviour {
             pickedUpCow = null;
         }
     }
+
     public void stopAiming()
     {
         aiming = false;
