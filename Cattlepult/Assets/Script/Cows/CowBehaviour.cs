@@ -205,6 +205,7 @@ public class CowBehaviour : MonoBehaviour
     public void pickUpByFarmer()
     {
         state = State.PickUp;
+        GetComponent<Collider2D>().isTrigger = true;
         anim.SetBool("pickUp", true);
     }
 

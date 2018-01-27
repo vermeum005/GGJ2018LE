@@ -35,7 +35,6 @@ public class CattlePult : MonoBehaviour {
 
     public void loadCattlePult(GameObject farmer, GameObject cow)
     {
-        Debug.Log("loaded");
         this.farmer = farmer;
         anim.SetBool("Loaded", true);
         loadedCow = cow;
