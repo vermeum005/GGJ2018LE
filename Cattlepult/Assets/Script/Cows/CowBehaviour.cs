@@ -21,6 +21,7 @@ public class CowBehaviour : MonoBehaviour
     private int runningTimer;
     private float runningSpeed = 0.03f;
     public float bellRingRange = 2;
+    private Animator anim;
 
     // Breeding information
     public int size;
@@ -41,7 +42,10 @@ public class CowBehaviour : MonoBehaviour
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         
+        randomX = Random.Range(-1f, 1f);
+        randomY = Random.Range(-1f, 1f);
         rend = GetComponent<Renderer>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -92,10 +96,12 @@ public class CowBehaviour : MonoBehaviour
             movement(new Vector3(randomX, randomY, 0));
             randomStandingTime = Random.Range(60, 180);
             standingTimer = 0;
+            randomStandingTime = Random.Range(60, 180);
         }
         else
         {
             standingTimer++;
+            anim.SetFloat("speed", 0);
             if (standingTimer > randomStandingTime)
             {
                 walkingTimer = 0;
@@ -110,6 +116,10 @@ public class CowBehaviour : MonoBehaviour
     public void setIdle()
     {
         state = State.Idle;
+    }
+    public void setAnimationBool(bool watmotje)
+    {
+        anim.SetBool("pickUp", watmotje);
     }
 
     void Running()
@@ -132,6 +142,7 @@ public class CowBehaviour : MonoBehaviour
         position = transform.position;
         position += move;
         transform.position = position;
+        anim.SetFloat("speed", 1);
     }
 
     private void cattlepult()
@@ -194,6 +205,7 @@ public class CowBehaviour : MonoBehaviour
     public void pickUpByFarmer()
     {
         state = State.PickUp;
+        anim.SetBool("pickUp", true);
     }
 
     public void droppedByFarmer(Vector3 dir, float dist)
