@@ -100,8 +100,6 @@ public class CowBehaviour : MonoBehaviour
         position = transform.position;
         runningTimer++;
      
-        
-        
         position += runningVector * runningSpeed;
         transform.position = position;
         if (runningTimer > randomRunningTime) {
