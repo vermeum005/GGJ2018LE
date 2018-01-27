@@ -23,6 +23,10 @@ public class CowBehaviour : MonoBehaviour
     public float bellRingRange = 2;
     private Animator anim;
 
+    public GameObject partSystem;
+    // Breeding Timer
+    private float breedingTimer = 5; 
+
     // Breeding information
     public int size;
     [SerializeField]
@@ -55,7 +59,12 @@ public class CowBehaviour : MonoBehaviour
         {
             case State.Idle:
                 Idle();
-                //still needs breeding timer
+                breedingTimer -= Time.deltaTime;
+                if (breedingTimer <= 0)
+                {                    
+                    state = State.BreedingIdle;
+                    partSystem.GetComponent<ParticleSystem>().Play();
+                }
                 break;
 
             case State.BreedingIdle:
@@ -231,6 +240,7 @@ public class CowBehaviour : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
+            partSystem.GetComponent<ParticleSystem>().Stop();
             state = State.Idle;
             timer = 2;
         }
@@ -241,6 +251,7 @@ public class CowBehaviour : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
+            partSystem.GetComponent<ParticleSystem>().Stop();
             state = State.Idle;
             timer = 2;
             breedThemCows(size, otherSize);
