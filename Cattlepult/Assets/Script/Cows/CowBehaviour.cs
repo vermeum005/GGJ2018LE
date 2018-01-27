@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CowBehaviour : MonoBehaviour
 {
-    enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, Breeding, PBreeding };
+    enum State { Idle, BreedingIdle, Running, PickUp, Cattlepult, inAir, Breeding, PBreeding };
     // Use this for initialization
     private bool isInRightPen;
     private State state;
@@ -20,7 +20,6 @@ public class CowBehaviour : MonoBehaviour
     private int runningTimer;
     private float runningSpeed = 0.03f;
 
-
     // Breeding information
     public int size;
     [SerializeField]
@@ -31,17 +30,20 @@ public class CowBehaviour : MonoBehaviour
     private float timer = 2;
     private int otherSize;
 
+    public float height = 10;
+    public float timeInAir = 10;
+
     void Start()
     {
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         randomRunningTime = Random.Range(60, 180);
+        GetComponent<FlightBehaviour>().throwCow(new Vector3(0, 0, 0), transform.position, height, timeInAir);
     }
 
     // Update is called once per frame
     void Update()
     {
-
         switch (state)
         {
             case State.Idle:
@@ -53,13 +55,17 @@ public class CowBehaviour : MonoBehaviour
                 break;
 
             case State.Running:
-                Running(farmerPosition);
+                Running();
                 break;
 
             case State.PickUp:
                 break;
 
-            case State.CattlePult:
+            case State.Cattlepult:
+                break;
+
+            case State.inAir:
+                GetComponent<FlightBehaviour>().flyLikeABird();
                 break;
 
             case State.Breeding:
@@ -71,6 +77,7 @@ public class CowBehaviour : MonoBehaviour
                 break;
         }
     }
+
     void Idle()
     {
         walkingTimer++;
@@ -95,19 +102,22 @@ public class CowBehaviour : MonoBehaviour
 
     }
 
-    void Running(Vector3 farmerPosition)
+    public void setIdle()
+    {
+        state = State.Idle;
+    }
+
+    void Running()
     {
         position = transform.position;
         runningTimer++;
-     
-        
-        
+
         position += runningVector * runningSpeed;
         transform.position = position;
-        if (runningTimer > randomRunningTime) {
+        if (runningTimer > randomRunningTime)
+        {
             runningTimer = 0;
-            state = State.Idle;
-            
+            setIdle();
         }
     }
 
@@ -117,6 +127,11 @@ public class CowBehaviour : MonoBehaviour
         position = transform.position;
         position += move;
         transform.position = position;
+    }
+
+    private void cattlepult()
+    {
+
     }
 
     public void setRunning(Vector3 farmerPosition)
@@ -211,5 +226,10 @@ public class CowBehaviour : MonoBehaviour
             timer = 2;
             breedThemCows(size, otherSize);
         }
+    }
+
+    public void setFlying()
+    {
+        state = State.inAir;
     }
 }
