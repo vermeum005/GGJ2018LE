@@ -7,6 +7,7 @@ public class FarmerBehaviour : MonoBehaviour {
     private float speed;
     private GameObject pen;
     private float radius;
+    private GameObject[] cowList;
 
     [SerializeField]
     private float maxSpeed = 1;        //Speed at which the farmer moves
@@ -18,6 +19,11 @@ public class FarmerBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         movement();
+
+
+        if (Input.GetButtonDown("Fire2")) {
+            ringBell();
+        }
 	}
 
     void movement(){
@@ -33,5 +39,12 @@ public class FarmerBehaviour : MonoBehaviour {
         tmpPos += new Vector3(moveHorizontal, moveVertical, 0) * speed;
 
         transform.position = tmpPos;
+    }
+    void ringBell() {
+        cowList = GameObject.FindGameObjectsWithTag("Cow");
+        foreach (GameObject cow in cowList) {
+            cow.GetComponent<CowBehaviour>().setRunning(transform.position);
+        }
+        
     }
 }

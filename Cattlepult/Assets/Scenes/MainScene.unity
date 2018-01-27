@@ -436,7 +436,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4047842162965486, guid: 99ea25865084b354e8e62190d1e1834a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4047842162965486, guid: 99ea25865084b354e8e62190d1e1834a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 1879581535}
   m_Layer: 0
   m_Name: Cow
-  m_TagString: Untagged
+  m_TagString: Cow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -545,7 +545,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1879581534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.951, y: 0.388, z: -0.140625}
+  m_LocalPosition: {x: -1.951, y: 0.388, z: 0}
   m_LocalScale: {x: 0.24983168, y: 0.24983168, z: 0.24983168}
   m_Children: []
   m_Father: {fileID: 0}
