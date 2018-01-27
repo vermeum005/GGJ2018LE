@@ -22,11 +22,6 @@ public class FlightBehaviour : MonoBehaviour {
         pFlight[1] = origin + dVec / 2 + new Vector3(dVec.y, -dVec.x, 0) * height;
         pFlight[2] = target;
 
-        Debug.Log("coords");
-        Debug.Log(origin);
-        Debug.Log(pFlight[1]);
-        Debug.Log(target);
-
         pScale[0] = new Vector3(0, 1, 0);
         pScale[1] = new Vector3(dVec.magnitude / 2, maxFlightScale + 1, 0);
         pScale[2] = new Vector3(dVec.magnitude, 1, 0);

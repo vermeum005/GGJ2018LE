@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CowBehaviour : MonoBehaviour
 {
-    enum State { Idle, BreedingIdle, Running, PickUp, Cattlepult, inAir, Breeding, PBreeding };
+    enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, inAir, Breeding, PBreeding };
+
     // Use this for initialization
     private bool isInRightPen;
     private State state;
@@ -25,6 +26,7 @@ public class CowBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject cowPrefab;
     private float sizeScale;
+    private Renderer rend;
 
     // breeding variables
     private float timer = 2;
@@ -38,6 +40,7 @@ public class CowBehaviour : MonoBehaviour
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         randomRunningTime = Random.Range(60, 180);
+        rend = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class CowBehaviour : MonoBehaviour
         {
             case State.Idle:
                 Idle();
+                //still needs breeding timer
                 break;
 
             case State.BreedingIdle:
@@ -58,9 +62,10 @@ public class CowBehaviour : MonoBehaviour
                 break;
 
             case State.PickUp:
+                // insert struggle animation
                 break;
 
-            case State.Cattlepult:
+            case State.CattlePult:
                 break;
 
             case State.inAir:
@@ -228,5 +233,11 @@ public class CowBehaviour : MonoBehaviour
     public void setFlying()
     {
         state = State.inAir;
+    }
+
+    public void loadCattlePult()
+    {
+        state = State.CattlePult;
+        rend.enabled = false;
     }
 }

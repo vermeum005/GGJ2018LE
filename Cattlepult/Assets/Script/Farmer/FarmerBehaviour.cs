@@ -13,6 +13,8 @@ public class FarmerBehaviour : MonoBehaviour {
     private Vector3 direction;
     private GameObject pickedUpCow;
 
+    public GameObject cattlePult;
+    private bool aiming;
 
     public float maxSpeed = 1;        //Speed at which the farmer moves
     public float pickUpDist = 10;
@@ -23,9 +25,12 @@ public class FarmerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        movement();
-        movePickedUpCow();
-        handleInput();
+        if (!aiming)
+        {
+            movement();
+            movePickedUpCow();
+            handleInput();
+        }
 	}
 
     void movement(){
@@ -61,7 +66,6 @@ public class FarmerBehaviour : MonoBehaviour {
     }
 
     public void ejectCow() {
-        Debug.Log(direction.normalized);
         pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer(direction.normalized, 3);
         pickedUpCow = null;
     }
@@ -80,5 +84,18 @@ public class FarmerBehaviour : MonoBehaviour {
                 pickedUpCow = hit.collider.gameObject;
             }
         } 
+    }
+    public void OnTriggerStay2D(Collider2D other)
+    {
+        if (pickedUpCow != null && other.tag == "CattlePult")
+        {
+            cattlePult.GetComponent<CattlePult>().loadCattlePult();
+            pickedUpCow.GetComponent<CowBehaviour>().loadCattlePult();
+            aiming = true;
+        }
+    }
+    public void stopAiming()
+    {
+        aiming = false;
     }
 }
