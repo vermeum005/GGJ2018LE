@@ -7,12 +7,12 @@ public class FarmerBehaviour : MonoBehaviour {
     private float speed;
     private GameObject pen;
     private float radius;
-<<<<<<< HEAD
+
     private GameObject[] cowList;
-=======
+
     private Vector3 direction;
     private GameObject pickedUpCow;
->>>>>>> master
+
 
     public float maxSpeed = 1;        //Speed at which the farmer moves
     public float pickUpDist = 10;
@@ -24,16 +24,8 @@ public class FarmerBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         movement();
-<<<<<<< HEAD
-
-
-        if (Input.GetButtonDown("Fire2")) {
-            ringBell();
-        }
-=======
         movePickedUpCow();
         handleInput();
->>>>>>> master
 	}
 
     void movement(){
@@ -50,19 +42,20 @@ public class FarmerBehaviour : MonoBehaviour {
 
         transform.position = tmpPos;
     }
-<<<<<<< HEAD
+
     void ringBell() {
         cowList = GameObject.FindGameObjectsWithTag("Cow");
         foreach (GameObject cow in cowList) {
             cow.GetComponent<CowBehaviour>().setRunning(transform.position);
         }
-        
-=======
+    }
 
     void handleInput() {
         if (Input.GetButtonDown("Fire1")) {
             if (pickedUpCow != null) ejectCow();
             else pickUpCow();
+        } if (Input.GetButtonDown("Fire2")) {
+            ringBell();
         }
     }
 
@@ -85,6 +78,5 @@ public class FarmerBehaviour : MonoBehaviour {
                 pickedUpCow = hit.collider.gameObject;
             }
         } 
->>>>>>> master
     }
 }

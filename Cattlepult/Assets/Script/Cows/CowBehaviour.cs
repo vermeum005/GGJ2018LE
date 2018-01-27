@@ -15,12 +15,11 @@ public class CowBehaviour : MonoBehaviour
     private int standingTimer;
     private int randomStandingTime;
     private float randomX, randomY;
-<<<<<<< HEAD
     private Vector3 farmerPosition;
     private int randomRunningTime;
     private int runningTimer;
     private float runningSpeed = 0.03f;
-=======
+
 
     // Breeding information
     public int size;
@@ -31,7 +30,7 @@ public class CowBehaviour : MonoBehaviour
     // breeding variables
     private float timer = 2;
     private int otherSize;
->>>>>>> master
+
     void Start()
     {
         state = State.Idle;
@@ -120,14 +119,14 @@ public class CowBehaviour : MonoBehaviour
         transform.position = position;
     }
 
-<<<<<<< HEAD
     public void setRunning(Vector3 farmerPosition)
-    {       
+    {
         state = State.Running;
         this.farmerPosition = farmerPosition;
         runningVector = position - farmerPosition;
         runningVector.Normalize();
-=======
+    }
+
     public void setSize(int newSize)
     {
         this.size = newSize;
@@ -153,7 +152,7 @@ public class CowBehaviour : MonoBehaviour
         scalemod *= sizeScale;
         transform.localScale = new Vector3(scalemod, scalemod, 0);
 
->>>>>>> master
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
