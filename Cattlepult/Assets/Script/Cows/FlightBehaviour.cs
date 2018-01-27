@@ -58,10 +58,22 @@ public class FlightBehaviour : MonoBehaviour {
     public void landCow()
     {
         GetComponent<Collider2D>().isTrigger = false;
+        foreach (GameObject cow in GameObject.FindGameObjectsWithTag("Cow"))
+        {
+            if (GetComponent<Collider2D>().IsTouching(cow.GetComponent<Collider2D>()))
+            {
+                if (GetComponent<CowBehaviour>().getSize() + 1 >= cow.GetComponent<CowBehaviour>().getSize())
+                {
+                    cow.GetComponent<CowBehaviour>().destroyCow();
+                    Destroy(this.gameObject);
+                }
+            }
+        }
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
         GetComponent<CowBehaviour>().setAnimationBool(false);
         rend.sortingOrder = 2;
+
     }
 
     public void flyLikeABird()
@@ -85,4 +97,5 @@ public class FlightBehaviour : MonoBehaviour {
             landCow();
         }
     }
+
 }

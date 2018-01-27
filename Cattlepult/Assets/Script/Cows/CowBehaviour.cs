@@ -158,11 +158,6 @@ public class CowBehaviour : MonoBehaviour
         anim.SetFloat("speed", 1);
     }
 
-    private void cattlepult()
-    {
-
-    }
-
     public void setRunning(Vector3 farmerPosition)
     {
         
@@ -279,5 +274,13 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.CattlePult;
         rend.enabled = false;
+    }
+    public int getSize()
+    {
+        return size;
+    }
+    public void destroyCow()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bellRingRange: 2
   partSystem: {fileID: 1715212462805730}
-  size: 0
+  size: 1
   cowPrefab: {fileID: 1047493503429666}
   height: 1
   timeInAir: 2
