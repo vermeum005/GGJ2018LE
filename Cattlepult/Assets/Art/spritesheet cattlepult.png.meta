@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2d631d34f2555674b8ffd3b403deeac1
-timeCreated: 1517048254
+timeCreated: 1517061939
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,13 @@ TextureImporter:
     21300010: spritesheet cattlepult_5
     21300012: spritesheet cattlepult_6
     21300014: spritesheet cattlepult_7
+    21300016: spritesheet cattlepult_8
+    21300018: spritesheet cattlepult_9
+    21300020: spritesheet cattlepult_10
+    21300022: spritesheet cattlepult_11
+    21300024: spritesheet cattlepult_12
+    21300026: spritesheet cattlepult_13
+    21300028: spritesheet cattlepult_14
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -94,110 +101,110 @@ TextureImporter:
       name: spritesheet cattlepult_0
       rect:
         serializedVersion: 2
-        x: 255
-        y: 316
-        width: 134
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 44
+        y: 894
+        width: 275
+        height: 231
+      alignment: 9
+      pivot: {x: 0.42659712, y: 0.17400885}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_1
+      name: spritesheet cattlepult_8
       rect:
         serializedVersion: 2
-        x: 3
-        y: 205
-        width: 122
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 331
+        y: 896
+        width: 312
+        height: 225
+      alignment: 9
+      pivot: {x: 0.48712754, y: 0.16978}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_2
+      name: spritesheet cattlepult_9
       rect:
         serializedVersion: 2
-        x: 131
-        y: 204
-        width: 109
-        height: 95
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 651
+        y: 896
+        width: 331
+        height: 215
+      alignment: 9
+      pivot: {x: 0.5242667, y: 0.17310081}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_3
+      name: spritesheet cattlepult_10
       rect:
         serializedVersion: 2
-        x: 244
-        y: 204
-        width: 106
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 8
+        y: 615
+        width: 313
+        height: 220
+      alignment: 9
+      pivot: {x: 0.48716882, y: 0.18052979}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_4
+      name: spritesheet cattlepult_11
       rect:
         serializedVersion: 2
-        x: 18
-        y: 99
-        width: 106
-        height: 105
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 337
+        y: 617
+        width: 275
+        height: 263
+      alignment: 9
+      pivot: {x: 0.42697844, y: 0.13350362}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_5
+      name: spritesheet cattlepult_12
       rect:
         serializedVersion: 2
-        x: 131
-        y: 97
-        width: 107
-        height: 104
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 629
+        y: 613
+        width: 271
+        height: 275
+      alignment: 9
+      pivot: {x: 0.4184906, y: 0.13489191}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_6
+      name: spritesheet cattlepult_13
       rect:
         serializedVersion: 2
-        x: 244
-        y: 97
-        width: 106
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 335
+        y: 337
+        width: 277
+        height: 268
+      alignment: 9
+      pivot: {x: 0.42750567, y: 0.13284849}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet cattlepult_7
+      name: spritesheet cattlepult_14
       rect:
         serializedVersion: 2
-        x: 19
-        y: 6
-        width: 106
-        height: 88
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 622
+        y: 335
+        width: 276
+        height: 253
+      alignment: 9
+      pivot: {x: 0.44179437, y: 0.15076612}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

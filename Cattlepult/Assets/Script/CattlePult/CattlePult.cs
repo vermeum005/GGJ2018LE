@@ -7,9 +7,11 @@ public class CattlePult : MonoBehaviour {
     private PultState state;
     public GameObject crosshair;
     public GameObject farmer;
+    private Animator anim;
     // Use this for initialization
     void Start() {
         state = PultState.Empty;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,8 @@ public class CattlePult : MonoBehaviour {
 
     public void loadCattlePult()
     {
-        //switch animation
+        Debug.Log("loaded");
+        anim.SetBool("Loaded", true);
         state = PultState.Loaded;
         crosshair.GetComponent<Crosshair>().activateCrosshair();
     }
@@ -38,6 +41,7 @@ public class CattlePult : MonoBehaviour {
     }
     public void firePult(Vector3 crosspos)
     {
+        anim.SetBool("Loaded", false);
         farmer.GetComponent<FarmerBehaviour>().stopAiming();
     }
 }
