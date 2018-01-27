@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cow
   - Crosshair
+  - CattlePult
   layers:
   - Default
   - TransparentFX

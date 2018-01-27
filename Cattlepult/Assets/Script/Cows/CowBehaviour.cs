@@ -26,6 +26,7 @@ public class CowBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject cowPrefab;
     private float sizeScale;
+    private Renderer rend;
 
     // breeding variables
     private float timer = 2;
@@ -36,6 +37,7 @@ public class CowBehaviour : MonoBehaviour
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         randomRunningTime = Random.Range(60, 180);
+        rend = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -214,4 +216,12 @@ public class CowBehaviour : MonoBehaviour
             breedThemCows(size, otherSize);
         }
     }
+
+    public void loadCattlePult()
+    {
+        state = State.CattlePult;
+        rend.enabled = false;
+    }
+
+
 }

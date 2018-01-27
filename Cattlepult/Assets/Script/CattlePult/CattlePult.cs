@@ -6,6 +6,7 @@ public class CattlePult : MonoBehaviour {
     public enum PultState { Loaded, Shooting, Empty };
     private PultState state;
     public GameObject crosshair;
+    public GameObject farmer;
     // Use this for initialization
     void Start() {
         state = PultState.Empty;
@@ -37,6 +38,6 @@ public class CattlePult : MonoBehaviour {
     }
     public void firePult(Vector3 crosspos)
     {
-        
+        farmer.GetComponent<FarmerBehaviour>().stopAiming();
     }
 }
