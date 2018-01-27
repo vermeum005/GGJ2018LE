@@ -46,6 +46,7 @@ public class CowBehaviour : MonoBehaviour
         {
             case State.Idle:
                 Idle();
+                //still needs breeding timer
                 break;
 
             case State.BreedingIdle:
@@ -57,6 +58,7 @@ public class CowBehaviour : MonoBehaviour
                 break;
 
             case State.PickUp:
+                // insert struggle animation
                 break;
 
             case State.CattlePult:
