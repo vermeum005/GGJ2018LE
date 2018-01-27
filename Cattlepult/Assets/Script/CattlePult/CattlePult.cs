@@ -11,6 +11,7 @@ public class CattlePult : MonoBehaviour {
     public float throwHeight = 1f;
     public float airTime = 2f;
     public float maxScale = 1f;
+    private Animator anim;
 
     // Use this for initialization
     void Start() {
