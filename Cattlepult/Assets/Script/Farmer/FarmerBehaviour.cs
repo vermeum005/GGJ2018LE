@@ -35,7 +35,8 @@ public class FarmerBehaviour : MonoBehaviour {
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
-        direction = new Vector3(moveHorizontal, moveVertical, 0);
+        if (new Vector3(moveHorizontal, moveVertical, 0).magnitude != 0)
+            direction = new Vector3(moveHorizontal, moveVertical, 0).normalized;
 
         Vector3 tmpPos = transform.position;
         tmpPos += new Vector3(moveHorizontal, moveVertical, 0) * speed;
@@ -60,7 +61,8 @@ public class FarmerBehaviour : MonoBehaviour {
     }
 
     public void ejectCow() {
-        pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer();
+        Debug.Log(direction.normalized);
+        pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer(direction.normalized, 3);
         pickedUpCow = null;
     }
 

@@ -165,8 +165,6 @@ public class CowBehaviour : MonoBehaviour
         float scalemod = transform.localScale.x;
         scalemod *= sizeScale;
         transform.localScale = new Vector3(scalemod, scalemod, 0);
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -188,9 +186,9 @@ public class CowBehaviour : MonoBehaviour
         state = State.PickUp;
     }
 
-    public void droppedByFarmer()
+    public void droppedByFarmer(Vector3 dir, float dist)
     {
-        state = State.Idle;
+        GetComponent<FlightBehaviour>().throwCow(this.transform.position, this.transform.position + (dir * dist), 0, 1f, 1);
     }
 
     private void breedThemCows(int parent1, int parent2)
