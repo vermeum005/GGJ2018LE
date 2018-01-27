@@ -16,6 +16,9 @@ public class FarmerBehaviour : MonoBehaviour {
     public GameObject cattlePult;
     private bool aiming;
 
+    private int bellRingTimer;
+    private int bellRingTime = 120;
+
     public float maxSpeed = 1;        //Speed at which the farmer moves
     public float pickUpDist = 10;
     //private bool isInRightPen = false;
@@ -57,11 +60,14 @@ public class FarmerBehaviour : MonoBehaviour {
     }
 
     void handleInput() {
+        bellRingTimer++;
+
         if (Input.GetButtonDown("Fire1")) {
             if (pickedUpCow != null) ejectCow();
             else pickUpCow();
-        } if (Input.GetButtonDown("Fire2")) {
+        } if (Input.GetButtonDown("Fire2") && bellRingTimer > bellRingTime) {
             ringBell();
+            bellRingTimer = 0;
         }
     }
 

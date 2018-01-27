@@ -17,9 +17,10 @@ public class CowBehaviour : MonoBehaviour
     private int randomStandingTime;
     private float randomX, randomY;
     private Vector3 farmerPosition;
-    private int randomRunningTime;
+    private float runningTime;
     private int runningTimer;
     private float runningSpeed = 0.03f;
+    public float bellRingRange = 2;
 
     // Breeding information
     public int size;
@@ -39,7 +40,7 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
-        randomRunningTime = Random.Range(60, 180);
+        
         rend = GetComponent<Renderer>();
     }
 
@@ -118,7 +119,7 @@ public class CowBehaviour : MonoBehaviour
 
         position += runningVector * runningSpeed;
         transform.position = position;
-        if (runningTimer > randomRunningTime)
+        if (runningTimer > runningTime)
         {
             runningTimer = 0;
             setIdle();
@@ -140,10 +141,14 @@ public class CowBehaviour : MonoBehaviour
 
     public void setRunning(Vector3 farmerPosition)
     {
-        state = State.Running;
+        
         this.farmerPosition = farmerPosition;
         runningVector = position - farmerPosition;
-        runningVector.Normalize();
+        if (runningVector.magnitude < bellRingRange) {
+            runningTime = (bellRingRange - runningVector.magnitude) * 40;
+            runningVector.Normalize();
+            state = State.Running;            
+        }      
     }
 
     public void setSize(int newSize)
