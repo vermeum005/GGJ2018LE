@@ -89,9 +89,10 @@ public class FarmerBehaviour : MonoBehaviour {
     {
         if (pickedUpCow != null && other.tag == "CattlePult")
         {
-            cattlePult.GetComponent<CattlePult>().loadCattlePult();
+            cattlePult.GetComponent<CattlePult>().loadCattlePult(this.gameObject, pickedUpCow);
             pickedUpCow.GetComponent<CowBehaviour>().loadCattlePult();
             aiming = true;
+            pickedUpCow = null;
         }
     }
     public void stopAiming()

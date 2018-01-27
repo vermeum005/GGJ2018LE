@@ -15,11 +15,15 @@ public class FlightBehaviour : MonoBehaviour {
     
     public void throwCow(Vector3 origin, Vector3 target, float height = 0, float flightTime = 1, float maxFlightScale = 0)
     {
+        GetComponent<Collider2D>().isTrigger = true;
         this.flightTime = flightTime;
         Vector3 dVec = target - origin;
+        Vector3 ortVec = new Vector3(dVec.y, -dVec.x, 0) * height;
+
+        if (ortVec.y < 0) ortVec *= -1;
 
         pFlight[0] = origin;
-        pFlight[1] = origin + dVec / 2 + new Vector3(dVec.y, -dVec.x, 0) * height;
+        pFlight[1] = origin + dVec / 2 + ortVec;
         pFlight[2] = target;
 
         pScale[0] = new Vector3(0, 1, 0);
@@ -36,6 +40,7 @@ public class FlightBehaviour : MonoBehaviour {
 
     public void landCow()
     {
+        GetComponent<Collider2D>().isTrigger = false;
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
     }

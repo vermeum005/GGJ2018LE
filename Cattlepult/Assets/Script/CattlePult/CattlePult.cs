@@ -6,7 +6,12 @@ public class CattlePult : MonoBehaviour {
     public enum PultState { Loaded, Shooting, Empty };
     private PultState state;
     public GameObject crosshair;
-    public GameObject farmer;
+    private GameObject farmer;
+    private GameObject loadedCow;
+    public float throwHeight = 1f;
+    public float airTime = 2f;
+    public float maxScale = 1f;
+
     // Use this for initialization
     void Start() {
         state = PultState.Empty;
@@ -26,18 +31,23 @@ public class CattlePult : MonoBehaviour {
         }
     }
 
-    public void loadCattlePult()
+    public void loadCattlePult(GameObject farmer, GameObject cow)
     {
         //switch animation
+        this.farmer = farmer;
+        loadedCow = cow;
         state = PultState.Loaded;
         crosshair.GetComponent<Crosshair>().activateCrosshair();
     }
+
     public PultState getState()
     {
         return state;
     }
+
     public void firePult(Vector3 crosspos)
     {
         farmer.GetComponent<FarmerBehaviour>().stopAiming();
+        loadedCow.GetComponent<FlightBehaviour>().throwCow(transform.position, crosspos, throwHeight, airTime, maxScale);
     }
 }
