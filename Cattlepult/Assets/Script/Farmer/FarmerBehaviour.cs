@@ -19,6 +19,8 @@ public class FarmerBehaviour : MonoBehaviour {
     public float maxSpeed = 1;        //Speed at which the farmer moves
     public float pickUpDist = 10;
     //private bool isInRightPen = false;
+    [SerializeField]
+    private bool dontThrow = false;
 
 	// Use this for initialization
 	void Start () {}
@@ -58,7 +60,7 @@ public class FarmerBehaviour : MonoBehaviour {
 
     void handleInput() {
         if (Input.GetButtonDown("Fire1")) {
-            if (pickedUpCow != null) ejectCow();
+            if (pickedUpCow != null && !dontThrow) ejectCow();
             else pickUpCow();
         } if (Input.GetButtonDown("Fire2")) {
             ringBell();
@@ -87,13 +89,23 @@ public class FarmerBehaviour : MonoBehaviour {
     }
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (pickedUpCow != null && other.tag == "CattlePult")
+        if (pickedUpCow != null && other.tag == "CattlePult" && Input.GetButtonDown("Fire1"))
         {
             cattlePult.GetComponent<CattlePult>().loadCattlePult(this.gameObject, pickedUpCow);
             pickedUpCow.GetComponent<CowBehaviour>().loadCattlePult();
             aiming = true;
             pickedUpCow = null;
         }
+    }
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "CattlePult")
+            dontThrow = true;
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "CattlePult")
+            dontThrow = false;
     }
     public void stopAiming()
     {
