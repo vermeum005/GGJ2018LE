@@ -251,6 +251,7 @@ public class CowBehaviour : MonoBehaviour
     {
         rend.enabled = true;
         state = State.inAir;
+        rend.sortingOrder = 6;
     }
 
     public void loadCattlePult()

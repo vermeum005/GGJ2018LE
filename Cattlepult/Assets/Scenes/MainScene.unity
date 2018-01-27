@@ -484,6 +484,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1160413298 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1029939344202106, guid: 99ea25865084b354e8e62190d1e1834a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1342390586}
+--- !u!95 &1160413299
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160413298}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6f0b51bcad13b04a985991d53fca4a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1342390586
 Prefab:
   m_ObjectHideFlags: 0
@@ -536,8 +558,19 @@ Prefab:
     - target: {fileID: 114345168794355378, guid: 99ea25865084b354e8e62190d1e1834a,
         type: 2}
       propertyPath: cattlePult
-      value:
+      value: 
       objectReference: {fileID: 1516828490}
+    - target: {fileID: 212083882382388234, guid: 99ea25865084b354e8e62190d1e1834a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 50ddda2752fb130498346b60a5b052e7,
+        type: 3}
+    - target: {fileID: 212083882382388234, guid: 99ea25865084b354e8e62190d1e1834a,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99ea25865084b354e8e62190d1e1834a, type: 2}
   m_IsPrefabParent: 0
@@ -624,8 +657,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17fc2e6b9be7b39498c855ceee58d983, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   crosshair: {fileID: 420223356}
   throwHeight: 1
   airTime: 2
@@ -669,7 +702,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1667481043
@@ -714,7 +747,7 @@ Prefab:
     - target: {fileID: 114890838496294508, guid: 268edfb1dfb4df34c805439067265cde,
         type: 2}
       propertyPath: cattlePult
-      value:
+      value: 
       objectReference: {fileID: 1516828490}
     - target: {fileID: 212713124005996140, guid: 268edfb1dfb4df34c805439067265cde,
         type: 2}

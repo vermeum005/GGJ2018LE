@@ -24,9 +24,12 @@ public class FarmerBehaviour : MonoBehaviour {
     //private bool isInRightPen = false;
     [SerializeField]
     private bool dontThrow = false;
-
+    private Animator anim;
+    private float offset;
 	// Use this for initialization
-	void Start () {}
+	void Start () {
+        anim = GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -45,6 +48,14 @@ public class FarmerBehaviour : MonoBehaviour {
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
+        if (moveHorizontal != 0 || moveVertical != 0)
+        {
+            anim.SetFloat("speed", 1);
+        }
+        else
+        {
+            anim.SetFloat("speed", 0);
+        }
         if (new Vector3(moveHorizontal, moveVertical, 0).magnitude != 0)
             direction = new Vector3(moveHorizontal, moveVertical, 0).normalized;
 
@@ -76,11 +87,14 @@ public class FarmerBehaviour : MonoBehaviour {
     public void ejectCow() {
         pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer(direction.normalized, 3);
         pickedUpCow = null;
+        anim.SetBool("pickup", false);
     }
 
     public void movePickedUpCow() {
         if (pickedUpCow != null) {
-            pickedUpCow.transform.position = transform.position;
+            Vector3 tmpPos = transform.position;
+            tmpPos.y += offset;
+            pickedUpCow.transform.position = tmpPos;
         }
     }
 
@@ -90,6 +104,7 @@ public class FarmerBehaviour : MonoBehaviour {
             if (hit.collider.gameObject.CompareTag("Cow")) {
                 hit.collider.gameObject.GetComponent<CowBehaviour>().pickUpByFarmer();
                 pickedUpCow = hit.collider.gameObject;
+                anim.SetBool("pickup", true);
             }
         } 
     }
@@ -102,6 +117,7 @@ public class FarmerBehaviour : MonoBehaviour {
             pickedUpCow.GetComponent<CowBehaviour>().loadCattlePult();
             aiming = true;
             pickedUpCow = null;
+            anim.SetBool("pickup", false);
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
