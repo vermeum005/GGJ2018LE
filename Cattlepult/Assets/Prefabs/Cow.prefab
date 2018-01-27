@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4592996783059958}
   - component: {fileID: 212929073193255704}
   - component: {fileID: 58838159575705842}
-  - component: {fileID: 114682704435335676}
   - component: {fileID: 50267718540321882}
+  - component: {fileID: 114927662623334130}
   m_Layer: 0
   m_Name: Cow
   m_TagString: Cow
@@ -78,7 +78,7 @@ CircleCollider2D:
   m_Offset: {x: 0.026906013, y: 0}
   serializedVersion: 2
   m_Radius: 1.526906
---- !u!114 &114682704435335676
+--- !u!114 &114927662623334130
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -86,13 +86,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1491901032458336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a42b18c01bc1e4f4c867606ae78df08e, type: 3}
+  m_Script: {fileID: 11500000, guid: 02ee6752dde397948869fba8db0cad6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1
   cowPrefab: {fileID: 1491901032458336}
-  sizeScale: 1.2
-  speed: 0
 --- !u!212 &212929073193255704
 SpriteRenderer:
   m_ObjectHideFlags: 1
