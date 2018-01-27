@@ -12,7 +12,11 @@ public class FlightBehaviour : MonoBehaviour {
     private Vector3 stdScale;
     private float maxFlightScale;
     private Vector3 target;
-    
+    private Renderer rend;
+    private void Start()
+    {
+        rend = GetComponent<Renderer>();
+    }
     public void throwCow(Vector3 origin, Vector3 target, float height = 0, float flightTime = 1, float maxFlightScale = 0)
     {
         GetComponent<Collider2D>().isTrigger = true;
@@ -44,6 +48,7 @@ public class FlightBehaviour : MonoBehaviour {
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
         GetComponent<CowBehaviour>().setAnimationBool(false);
+        rend.sortingOrder = 2;
     }
 
     public void flyLikeABird()
