@@ -6,6 +6,7 @@ public class FlightBehaviour : MonoBehaviour {
 
     private Vector3[] pFlight = new Vector3[3];
     private Vector3[] pScale = new Vector3[3];
+    private Vector3[] pShaddow = new Vector3[3];
     private float t;
     private float flightTime;
     private float flightScale = 0.01f;
@@ -13,12 +14,18 @@ public class FlightBehaviour : MonoBehaviour {
     private float maxFlightScale;
     private Vector3 target;
     private Renderer rend;
+    private Vector3 shaddowLocPos;
+    private Vector3 shaddowLocScale;
+    private GameObject shaddow;
+
     private void Start()
     {
         rend = GetComponent<Renderer>();
     }
+
     public void throwCow(Vector3 origin, Vector3 target, float height = 0, float flightTime = 1, float maxFlightScale = 0)
     {
+        this.shaddow = this.transform.Find("Shaddow").gameObject;
         GetComponent<Collider2D>().isTrigger = true;
         this.flightTime = flightTime;
         Vector3 dVec = target - origin;
@@ -34,9 +41,15 @@ public class FlightBehaviour : MonoBehaviour {
         pScale[1] = new Vector3(dVec.magnitude / 2, maxFlightScale + 1, 0);
         pScale[2] = new Vector3(dVec.magnitude, 1, 0);
 
+        pShaddow[0] = origin;
+        pShaddow[1] = origin + dVec / 2 + new Vector3(dVec.y, -dVec.x, 0);
+        pShaddow[2] = target;
+
         stdScale = transform.localScale;
         this.target = target;
         this.maxFlightScale = maxFlightScale;
+        shaddowLocPos = shaddow.transform.localPosition;
+        shaddowLocScale = shaddow.transform.localScale;
         t = 0;
 
         GetComponent<CowBehaviour>().setFlying();
@@ -61,6 +74,11 @@ public class FlightBehaviour : MonoBehaviour {
 
         Vector3 scale = stdScale * ((1 - t)*(1 - t) * pScale[0] + 2 * (1 - t) * t * pScale[1] + t * t * pScale[2]).y;
         transform.localScale = scale;
+
+        Vector3 posNoHeight = (1 - t) * (1 - t) * pShaddow[0] + 2 * (1 - t) * t * pShaddow[1] + t * t * pShaddow[2];
+        Vector3 posDif = posNoHeight - pos;
+
+        shaddow.transform.localPosition = shaddowLocPos + posDif;
 
         if (t + dt * Time.deltaTime > 1)
         {
