@@ -220,11 +220,13 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.PickUp;
         GetComponent<Collider2D>().isTrigger = true;
+        transform.Find("Shaddow").GetComponent<SpriteRenderer>().enabled = false;
         anim.SetBool("pickUp", true);
     }
 
     public void droppedByFarmer(Vector3 dir, float dist)
     {
+        transform.Find("Shaddow").GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<FlightBehaviour>().throwCow(this.transform.position, this.transform.position + (dir * dist), 0, 1f, 1);
     }
 
