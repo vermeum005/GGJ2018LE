@@ -178,10 +178,11 @@ public class CowBehaviour : MonoBehaviour
     public void setSize(int newSize)
     {
         this.size = newSize;
+        transform.localScale = new Vector3(0.15f, 0.15f, 0);
         switch (size)
         {
             case 1:
-                sizeScale = 0;
+                sizeScale = 1;
                 break;
             case 2:
                 sizeScale = 1.2f;
