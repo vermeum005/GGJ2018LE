@@ -220,13 +220,13 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.PickUp;
         GetComponent<Collider2D>().isTrigger = true;
-        transform.Find("Shaddow").GetComponent<SpriteRenderer>().enabled = false;
+        transform.Find("Shadow").GetComponent<SpriteRenderer>().enabled = false;
         anim.SetBool("pickUp", true);
     }
 
     public void droppedByFarmer(Vector3 dir, float dist)
     {
-        transform.Find("Shaddow").GetComponent<SpriteRenderer>().enabled = true;
+        transform.Find("Shadow").GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<FlightBehaviour>().throwCow(this.transform.position, this.transform.position + (dir * dist), 0, 1f, 1);
     }
 
@@ -251,6 +251,7 @@ public class CowBehaviour : MonoBehaviour
             partSystem.GetComponent<ParticleSystem>().Stop();
             state = State.Idle;
             timer = 2;
+            breedingTimer = 20;
         }
     }
 
@@ -263,6 +264,7 @@ public class CowBehaviour : MonoBehaviour
             state = State.Idle;
             timer = 2;
             breedThemCows(size, otherSize);
+            breedingTimer = 20;
         }
     }
 
