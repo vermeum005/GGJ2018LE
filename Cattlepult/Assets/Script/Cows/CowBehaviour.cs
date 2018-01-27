@@ -113,6 +113,10 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.Idle;
     }
+    public void setAnimationBool(bool watmotje)
+    {
+        anim.SetBool("pickUp", watmotje);
+    }
 
     void Running()
     {
@@ -193,6 +197,7 @@ public class CowBehaviour : MonoBehaviour
     public void pickUpByFarmer()
     {
         state = State.PickUp;
+        anim.SetBool("pickUp", true);
     }
 
     public void droppedByFarmer(Vector3 dir, float dist)

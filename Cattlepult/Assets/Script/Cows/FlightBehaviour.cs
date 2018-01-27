@@ -43,6 +43,7 @@ public class FlightBehaviour : MonoBehaviour {
         GetComponent<Collider2D>().isTrigger = false;
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
+        GetComponent<CowBehaviour>().setAnimationBool(false);
     }
 
     public void flyLikeABird()
