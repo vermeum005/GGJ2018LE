@@ -20,7 +20,7 @@ public class CowBehaviour : MonoBehaviour
     private int randomRunningTime;
     private int runningTimer;
     private float runningSpeed = 0.03f;
-
+    private Animator anim;
     // Breeding information
     public int size;
     [SerializeField]
@@ -40,7 +40,10 @@ public class CowBehaviour : MonoBehaviour
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         randomRunningTime = Random.Range(60, 180);
+        randomX = Random.Range(-1f, 1f);
+        randomY = Random.Range(-1f, 1f);
         rend = GetComponent<Renderer>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -85,16 +88,16 @@ public class CowBehaviour : MonoBehaviour
     void Idle()
     {
         walkingTimer++;
-
         if (walkingTimer < randomWalkingTime)
         {
             movement(new Vector3(randomX, randomY, 0));
-            randomStandingTime = Random.Range(60, 180);
             standingTimer = 0;
+            randomStandingTime = Random.Range(60, 180);
         }
         else
         {
             standingTimer++;
+            anim.SetFloat("speed", 0);
             if (standingTimer > randomStandingTime)
             {
                 walkingTimer = 0;
@@ -131,6 +134,7 @@ public class CowBehaviour : MonoBehaviour
         position = transform.position;
         position += move;
         transform.position = position;
+        anim.SetFloat("speed", 1);
     }
 
     private void cattlepult()
