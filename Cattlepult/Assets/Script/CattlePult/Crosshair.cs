@@ -23,11 +23,9 @@ public class Crosshair : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (active)
-        {
-            movement();
-            inputs();
-        }
+        if (!active) return;
+        inputs();
+        movement();
 	}
 
     public void activateCrosshair()
@@ -60,7 +58,6 @@ public class Crosshair : MonoBehaviour {
 
     void inputs()
     {
-        if (!active) return;
         if (Input.GetButtonDown("Fire1"))
         {
             active = false;

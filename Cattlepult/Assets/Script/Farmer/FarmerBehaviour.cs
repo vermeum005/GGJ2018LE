@@ -82,12 +82,25 @@ public class FarmerBehaviour : MonoBehaviour {
         bellRingTimer++;
 
         if (Input.GetButtonDown("Fire1")) {
-            if (pickedUpCow != null && !dontThrow) ejectCow();
-            else pickUpCow();
+            if (dontThrow) loadCattlepult();
+            else {
+                if (pickedUpCow != null) ejectCow();
+                else pickUpCow();
+            }
         } if (Input.GetButtonDown("Fire2") && bellRingTimer > bellRingTime) {
             ringBell();
             bellRingTimer = 0;
         }
+    }
+
+    public void loadCattlepult()
+    {
+        if (pickedUpCow == null) return;
+        cattlePult.GetComponent<CattlePult>().loadCattlePult(this.gameObject, pickedUpCow);
+        pickedUpCow.GetComponent<CowBehaviour>().loadCattlePult();
+        aiming = true;
+        pickedUpCow = null;
+        anim.SetBool("pickup", false);
     }
 
     public void ejectCow() {
@@ -108,7 +121,7 @@ public class FarmerBehaviour : MonoBehaviour {
     public void pickUpCow() {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, pickUpDist);
         if (hit.collider != null) {
-            if (hit.collider.gameObject.CompareTag("Cow")) {
+            if (hit.collider.gameObject.CompareTag("Cow") && !hit.collider.gameObject.GetComponent<Collider2D>().isTrigger) {
                 hit.collider.gameObject.GetComponent<CowBehaviour>().pickUpByFarmer();
                 pickedUpCow = hit.collider.gameObject;
                 anim.SetBool("pickup", true);
@@ -116,17 +129,6 @@ public class FarmerBehaviour : MonoBehaviour {
         } 
     }
 
-    public void OnTriggerStay2D(Collider2D other)
-    {
-        if (pickedUpCow != null && other.tag == "CattlePult" && Input.GetButtonDown("Fire1"))
-        {
-            cattlePult.GetComponent<CattlePult>().loadCattlePult(this.gameObject, pickedUpCow);
-            pickedUpCow.GetComponent<CowBehaviour>().loadCattlePult();
-            aiming = true;
-            pickedUpCow = null;
-            anim.SetBool("pickup", false);
-        }
-    }
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "CattlePult")
