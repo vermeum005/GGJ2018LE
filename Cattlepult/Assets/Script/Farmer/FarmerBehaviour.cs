@@ -7,9 +7,11 @@ public class FarmerBehaviour : MonoBehaviour {
     private float speed;
     private GameObject pen;
     private float radius;
+    private Vector3 direction;
+    private GameObject pickedUpCow;
 
-    [SerializeField]
-    private float maxSpeed = 1;        //Speed at which the farmer moves
+    public float maxSpeed = 1;        //Speed at which the farmer moves
+    public float pickUpDist = 10;
     //private bool isInRightPen = false;
 
 	// Use this for initialization
@@ -18,20 +20,50 @@ public class FarmerBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         movement();
+        movePickedUpCow();
+        handleInput();
 	}
 
     void movement(){
-
         /* Downscale speed for easy of use */
         speed = maxSpeed / 100;
 
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis ("Vertical");
+        direction = new Vector3(moveHorizontal, moveVertical, 0);
 
         Vector3 tmpPos = transform.position;
         tmpPos += new Vector3(moveHorizontal, moveVertical, 0) * speed;
 
         transform.position = tmpPos;
+    }
+
+    void handleInput() {
+        if (Input.GetButtonDown("Fire1")) {
+            if (pickedUpCow != null) ejectCow();
+            else pickUpCow();
+        }
+    }
+
+    public void ejectCow() {
+        pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer();
+        pickedUpCow = null;
+    }
+
+    public void movePickedUpCow() {
+        if (pickedUpCow != null) {
+            pickedUpCow.transform.position = transform.position;
+        }
+    }
+
+    public void pickUpCow() {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, pickUpDist);
+        if (hit.collider != null) {
+            if (hit.collider.gameObject.CompareTag("Cow")) {
+                hit.collider.gameObject.GetComponent<CowBehaviour>().pickUpByFarmer();
+                pickedUpCow = hit.collider.gameObject;
+            }
+        } 
     }
 }

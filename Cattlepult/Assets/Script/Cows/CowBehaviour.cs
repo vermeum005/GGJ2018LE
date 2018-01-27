@@ -52,8 +52,6 @@ public class CowBehaviour : MonoBehaviour
 
         if (walkingTimer < randomWalkingTime)
         {
-
-            Debug.Log(randomX + " " + randomY);
             movement(new Vector3(randomX, randomY, 0));
             randomStandingTime = Random.Range(60, 180);
             standingTimer = 0;
@@ -89,5 +87,13 @@ public class CowBehaviour : MonoBehaviour
 
             }
         }
+    }
+
+    public void pickUpByFarmer() {
+        state = State.PickUp;
+    }
+
+    public void droppedByFarmer() {
+        state = State.Idle;
     }
 }
