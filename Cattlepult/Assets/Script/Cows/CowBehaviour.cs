@@ -38,7 +38,6 @@ public class CowBehaviour : MonoBehaviour
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         randomRunningTime = Random.Range(60, 180);
-        GetComponent<FlightBehaviour>().throwCow(new Vector3(0, 0, 0), transform.position, height, timeInAir);
     }
 
     // Update is called once per frame
