@@ -151,6 +151,10 @@ public class CowBehaviour : MonoBehaviour
         position = transform.position;
         position += move;
         transform.position = position;
+        if (move.x > 0)
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         anim.SetFloat("speed", 1);
     }
 
@@ -214,6 +218,7 @@ public class CowBehaviour : MonoBehaviour
     public void pickUpByFarmer()
     {
         state = State.PickUp;
+        GetComponent<Collider2D>().isTrigger = true;
         anim.SetBool("pickUp", true);
     }
 
@@ -262,6 +267,7 @@ public class CowBehaviour : MonoBehaviour
     {
         rend.enabled = true;
         state = State.inAir;
+        rend.sortingOrder = 6;
     }
 
     public void loadCattlePult()

@@ -89,7 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c53c2360a473bd4f834a04ff520cd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cattlePult: {fileID: 0}
   maxSpeed: 5
+  pickUpDist: 10
+  dontThrow: 0
 --- !u!212 &212083882382388234
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -99,7 +102,6 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -115,7 +117,6 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -123,8 +124,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 991c94155f8e41c47a76cbd533c46a38, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 50ddda2752fb130498346b60a5b052e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
