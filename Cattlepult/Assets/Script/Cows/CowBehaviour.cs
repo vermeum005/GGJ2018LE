@@ -142,6 +142,10 @@ public class CowBehaviour : MonoBehaviour
         position = transform.position;
         position += move;
         transform.position = position;
+        if (move.x > 0)
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+        else
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         anim.SetFloat("speed", 1);
     }
 

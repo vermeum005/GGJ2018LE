@@ -25,9 +25,10 @@ public class FarmerBehaviour : MonoBehaviour {
     [SerializeField]
     private bool dontThrow = false;
     private Animator anim;
-    private float offset;
-	// Use this for initialization
-	void Start () {
+    private float offsety = 0.90f;
+    private float offsetx = 0.10f;
+    // Use this for initialization
+    void Start () {
         anim = GetComponent<Animator>();
     }
 	
@@ -58,7 +59,12 @@ public class FarmerBehaviour : MonoBehaviour {
         }
         if (new Vector3(moveHorizontal, moveVertical, 0).magnitude != 0)
             direction = new Vector3(moveHorizontal, moveVertical, 0).normalized;
-
+        if (direction.x > 0)
+        {
+            transform.rotation = new Quaternion(0,180,0, 0);
+        }
+        else
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         Vector3 tmpPos = transform.position;
         tmpPos += new Vector3(moveHorizontal, moveVertical, 0) * speed;
 
@@ -93,7 +99,8 @@ public class FarmerBehaviour : MonoBehaviour {
     public void movePickedUpCow() {
         if (pickedUpCow != null) {
             Vector3 tmpPos = transform.position;
-            tmpPos.y += offset;
+            tmpPos.y += offsety;
+            tmpPos.x += offsetx;
             pickedUpCow.transform.position = tmpPos;
         }
     }
