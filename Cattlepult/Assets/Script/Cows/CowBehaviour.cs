@@ -222,6 +222,7 @@ public class CowBehaviour : MonoBehaviour
     public void droppedByFarmer(Vector3 dir, float dist)
     {
         transform.Find("Shadow").GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<FlightBehaviour>().cattlepulted = false;
         GetComponent<FlightBehaviour>().throwCow(this.transform.position, this.transform.position + (dir * dist), 0, 1f, 1);
     }
 

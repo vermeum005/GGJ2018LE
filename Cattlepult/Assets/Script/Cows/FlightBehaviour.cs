@@ -17,6 +17,7 @@ public class FlightBehaviour : MonoBehaviour {
     private Vector3 shadowLocPos;
     private Vector3 shadowLocScale;
     private GameObject shadow;
+    public bool cattlepulted = false;
 
     private void Start()
     {
@@ -58,22 +59,25 @@ public class FlightBehaviour : MonoBehaviour {
     public void landCow()
     {
         GetComponent<Collider2D>().isTrigger = false;
-        foreach (GameObject cow in GameObject.FindGameObjectsWithTag("Cow"))
+        if (cattlepulted)
         {
-            if (GetComponent<Collider2D>().IsTouching(cow.GetComponent<Collider2D>()))
+            foreach (GameObject cow in GameObject.FindGameObjectsWithTag("Cow"))
             {
-                if (GetComponent<CowBehaviour>().getSize() + 1 >= cow.GetComponent<CowBehaviour>().getSize())
+                if (GetComponent<Collider2D>().IsTouching(cow.GetComponent<Collider2D>()))
                 {
-                    cow.GetComponent<CowBehaviour>().destroyCow();
-                    Destroy(this.gameObject);
+                    if (GetComponent<CowBehaviour>().getSize() + 1 >= cow.GetComponent<CowBehaviour>().getSize())
+                    {
+                        cow.GetComponent<CowBehaviour>().destroyCow();
+                        Destroy(this.gameObject);
+                    }
                 }
             }
-        }
-        foreach (GameObject farmer in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            if (GetComponent<Collider2D>().IsTouching(farmer.GetComponent<CircleCollider2D>()))
+            foreach (GameObject farmer in GameObject.FindGameObjectsWithTag("Player"))
             {
-                farmer.GetComponent<FarmerBehaviour>().stunFarmer(this.gameObject.GetComponent<CowBehaviour>().getSize());
+                if (GetComponent<Collider2D>().IsTouching(farmer.GetComponent<CircleCollider2D>()))
+                {
+                    farmer.GetComponent<FarmerBehaviour>().stunFarmer(this.gameObject.GetComponent<CowBehaviour>().getSize());
+                }
             }
         }
         transform.position = target;
