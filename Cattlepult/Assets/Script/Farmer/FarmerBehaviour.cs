@@ -15,6 +15,11 @@ public class FarmerBehaviour : MonoBehaviour {
 
     public GameObject cattlePult;
     private bool aiming = false;
+    //sound related stuff
+    [SerializeField]
+    private GameObject soundWave;
+    private float soundTimer;
+    private bool ringing = false;
 
     public int playerId;
 
@@ -39,6 +44,14 @@ public class FarmerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (ringing)
+            soundTimer -= Time.deltaTime;
+        if (soundTimer <= 0)
+            stopSound();
+        else if (soundTimer < 0.8 && soundTimer > 0.5)
+            soundWave.GetComponent<Renderer>().enabled = false;
+        else
+            soundWave.GetComponent<Renderer>().enabled = true;
         if (!aiming && !stunned)
         {
             movement();
@@ -87,11 +100,22 @@ public class FarmerBehaviour : MonoBehaviour {
 
     void ringBell() {
         cowList = GameObject.FindGameObjectsWithTag("Cow");
+        showSound();
         foreach (GameObject cow in cowList) {
             cow.GetComponent<CowBehaviour>().setRunning(transform.position);
         }
     }
-
+    void showSound()
+    {
+        soundWave.GetComponent<Renderer>().enabled = true;
+        soundTimer = 1;
+        ringing = true;
+    }
+    void stopSound()
+    {
+        soundWave.GetComponent<Renderer>().enabled = false;
+        ringing = false;
+    }
     void handleInput() {
         bellRingTimer++;
 
