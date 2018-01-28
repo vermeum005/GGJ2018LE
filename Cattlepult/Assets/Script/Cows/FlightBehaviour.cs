@@ -69,6 +69,13 @@ public class FlightBehaviour : MonoBehaviour {
                 }
             }
         }
+        foreach (GameObject farmer in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (GetComponent<Collider2D>().IsTouching(farmer.GetComponent<CircleCollider2D>()))
+            {
+                farmer.GetComponent<FarmerBehaviour>().stunFarmer(this.gameObject.GetComponent<CowBehaviour>().getSize());
+            }
+        }
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
         GetComponent<CowBehaviour>().setAnimationBool(false);

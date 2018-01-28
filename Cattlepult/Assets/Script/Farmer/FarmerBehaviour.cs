@@ -27,6 +27,9 @@ public class FarmerBehaviour : MonoBehaviour {
     private Animator anim;
     private float offsety = 0.90f;
     private float offsetx = 0.10f;
+    // stun variables
+    public bool stunned = false;
+    public float stunTimer = 0;
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
@@ -34,11 +37,20 @@ public class FarmerBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (!aiming)
+        if (!aiming && !stunned)
         {
             movement();
             movePickedUpCow();
             handleInput();
+        }
+        else if (stunned)
+        {
+            stunTimer -= Time.deltaTime;
+            if (stunTimer <= 0)
+            {
+                stunned = false;
+                anim.SetBool("stunned", false);
+            }
         }
 	}
 
@@ -141,5 +153,32 @@ public class FarmerBehaviour : MonoBehaviour {
     public void stopAiming()
     {
         aiming = false;
+    }
+    public void stunFarmer(int size)
+    {
+        anim.SetBool("stunned", true);
+        switch (size)
+        {
+            case 1:
+                stunTimer = 0.3f;
+                stunned = true;
+                break;
+            case 2:
+                stunTimer = 0.5f;
+                stunned = true;
+                break;
+            case 3:
+                stunTimer = 1f;
+                stunned = true;
+                break;
+            case 4:
+                stunTimer = 1.5f;
+                stunned = true;
+                break;
+            case 5:
+                stunTimer = 2f;
+                stunned = true;
+                break;
+        }
     }
 }
