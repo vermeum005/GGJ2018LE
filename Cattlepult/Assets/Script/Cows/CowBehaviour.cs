@@ -6,6 +6,7 @@ public class CowBehaviour : MonoBehaviour
 {
     enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, inAir, Breeding, PBreeding, Dying};
     public static int maxCowsInPen = 20;
+    public static int minCowsInPen = 2;
 
     // Use this for initialization
     private bool isInRightPen;
@@ -72,6 +73,10 @@ public class CowBehaviour : MonoBehaviour
             num += 1;
         }
 
+        if (num < minCowsInPen) {
+            Instantiate(cowPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        }
+
         return num < maxCowsInPen;
     }
 
@@ -83,7 +88,7 @@ public class CowBehaviour : MonoBehaviour
             case State.Idle:
                 Idle();
                 breedingTimer -= Time.deltaTime;
-                if (breedingTimer <= 0 && canBreed())
+                if (canBreed() && breedingTimer <= 0)
                 {
                     state = State.BreedingIdle;
                     partSystem.GetComponent<ParticleSystem>().Play();
@@ -175,6 +180,7 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.Idle;
     }
+
     public void setAnimationBool(bool watmotje)
     {
         anim.SetBool("pickUp", watmotje);
@@ -205,6 +211,10 @@ public class CowBehaviour : MonoBehaviour
         else
             transform.rotation = new Quaternion(0, 0, 0, 0);
         anim.SetFloat("speed", 1);
+
+        if (Mathf.Abs(transform.position.x) > 7.6) destroyCow();
+        if (Mathf.Abs(transform.position.y) > 4.6) destroyCow();
+        if (transform.position.y > 1.9) destroyCow();
     }
 
     public void setRunning(Vector3 farmerPosition)
@@ -230,15 +240,15 @@ public class CowBehaviour : MonoBehaviour
                 break;
             case 2:
                 sizeScale = 1.2f;
-                damage = 2;
+                damage = 5;
                 break;
             case 3:
                 sizeScale = 1.5f;
-                damage = 8;
+                damage = 14;
                 break;
             case 4:
                 sizeScale = 1.75f;
-                damage = 20;
+                damage = 25;
                 break;
             case 5:
                 sizeScale = 2f;
@@ -340,6 +350,7 @@ public class CowBehaviour : MonoBehaviour
     public void loadCattlePult()
     {
         state = State.CattlePult;
+        partSystem.GetComponent<ParticleSystem>().Stop();
         rend.enabled = false;
     }
 

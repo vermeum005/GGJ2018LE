@@ -118,7 +118,7 @@ public class FarmerBehaviour : MonoBehaviour {
     }
 
     public void ejectCow() {
-        pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer(direction.normalized, 3);
+        pickedUpCow.GetComponent<CowBehaviour>().droppedByFarmer(direction.normalized, 2);
         pickedUpCow = null;
         anim.SetBool("pickup", false);
     }

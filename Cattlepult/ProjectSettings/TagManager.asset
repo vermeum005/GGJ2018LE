@@ -8,6 +8,7 @@ TagManager:
   - CattlePult
   - Cow
   - Barn
+  - Pen
   layers:
   - Default
   - TransparentFX

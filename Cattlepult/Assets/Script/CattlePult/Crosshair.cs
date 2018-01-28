@@ -9,9 +9,10 @@ public class Crosshair : MonoBehaviour {
     private bool active;
     private float speed;
     private Vector3 direction;
-    public float maxSpeed = 2;
+    public float maxSpeed = 3;
     private Renderer rend;
     private Vector3 startPos;
+    
 
     public int playerId;
 
