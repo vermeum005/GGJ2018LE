@@ -24,7 +24,7 @@ public class CattlePult : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         switch (state)
         {
             case PultState.Empty:

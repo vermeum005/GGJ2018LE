@@ -11,7 +11,7 @@ public class breedingHeart : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         lifeTime -= Time.deltaTime;
         position = transform.position;
         position.y += 0.005f;
