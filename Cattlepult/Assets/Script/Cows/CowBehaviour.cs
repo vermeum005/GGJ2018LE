@@ -52,7 +52,6 @@ public class CowBehaviour : MonoBehaviour
         randomY = Random.Range(-1f, 1f);
         rend = GetComponent<Renderer>();
         anim = GetComponent<Animator>();
-        damage = 1;
     }
 
     // Update is called once per frame
