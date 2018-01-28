@@ -73,12 +73,13 @@ public class FlightBehaviour : MonoBehaviour {
                     }
                 }
             }
-            foreach (GameObject farmer in GameObject.FindGameObjectsWithTag("Player"))
+        }
+
+        foreach (GameObject farmer in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (GetComponent<Collider2D>().IsTouching(farmer.GetComponent<CircleCollider2D>()))
             {
-                if (GetComponent<Collider2D>().IsTouching(farmer.GetComponent<CircleCollider2D>()))
-                {
-                    farmer.GetComponent<FarmerBehaviour>().stunFarmer(this.gameObject.GetComponent<CowBehaviour>().getSize());
-                }
+                farmer.GetComponent<FarmerBehaviour>().stunFarmer(this.gameObject.GetComponent<CowBehaviour>().getSize());
             }
         }
 
@@ -91,12 +92,28 @@ public class FlightBehaviour : MonoBehaviour {
                 return;
             }
         }
-        
-            
-        transform.position = target;
-        GetComponent<CowBehaviour>().setIdle();
-        GetComponent<CowBehaviour>().setAnimationBool(false);
-        rend.sortingOrder = 2;
+
+        bool kill = true;
+
+        foreach (GameObject Pen in GameObject.FindGameObjectsWithTag("Pen"))
+        {
+            if (GetComponent<Collider2D>().IsTouching(Pen.GetComponent<Collider2D>()))
+            {
+                kill = false; 
+            }
+        }
+
+        if (kill)
+        {
+            GetComponent<CowBehaviour>().destroyCow();
+        }
+        else
+        {
+            transform.position = target;
+            GetComponent<CowBehaviour>().setIdle();
+            GetComponent<CowBehaviour>().setAnimationBool(false);
+            rend.sortingOrder = 2;
+        }
 
     }
 

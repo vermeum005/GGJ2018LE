@@ -5,6 +5,7 @@ using UnityEngine;
 public class CowBehaviour : MonoBehaviour
 {
     enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, inAir, Breeding, PBreeding, Dying};
+    public static int maxCowsInPen = 20;
 
     // Use this for initialization
     private bool isInRightPen;
@@ -27,7 +28,7 @@ public class CowBehaviour : MonoBehaviour
 
     public int damage;
     // Breeding Timer
-    private float breedingTimer = 5;
+    private float breedingTimer = 0;
     public float deathSpeed = 0.08f;
 
     // Breeding information
@@ -49,10 +50,24 @@ public class CowBehaviour : MonoBehaviour
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
         
+        partSystem.GetComponent<ParticleSystem>().Stop();
         randomX = Random.Range(-1f, 1f);
         randomY = Random.Range(-1f, 1f);
         rend = GetComponent<Renderer>();
         anim = GetComponent<Animator>();
+    }
+
+    public bool canBreed()
+    {
+        int num = 0;
+        foreach (GameObject cow in GameObject.FindGameObjectsWithTag("Cow"))
+        {
+            if (cow.GetComponent<Collider2D>().isTrigger) continue;
+            if (transform.position.x * cow.transform.position.x <= 0) continue;
+            num += 1;
+        }
+
+        return num < maxCowsInPen;
     }
 
     // Update is called once per frame
@@ -63,14 +78,19 @@ public class CowBehaviour : MonoBehaviour
             case State.Idle:
                 Idle();
                 breedingTimer -= Time.deltaTime;
-                if (breedingTimer <= 0)
-                {                    
+                if (breedingTimer <= 0 && canBreed())
+                {
                     state = State.BreedingIdle;
                     partSystem.GetComponent<ParticleSystem>().Play();
                 }
                 break;
 
             case State.BreedingIdle:
+                if (!canBreed()) {
+                    state = State.BreedingIdle;
+                    partSystem.GetComponent<ParticleSystem>().Stop();
+                    breedingTimer = 0;
+                }
                 Idle();
                 break;
 
@@ -236,7 +256,7 @@ public class CowBehaviour : MonoBehaviour
                 state = State.Breeding;
                 otherCow.state = State.PBreeding;
             }
-        }
+        }        
     }
 
     public void pickUpByFarmer()
