@@ -13,6 +13,8 @@ public class Crosshair : MonoBehaviour {
     private Renderer rend;
     private Vector3 startPos;
 
+    public int playerId;
+
     void Start () {
         startPos = cattlePult.transform.position;
         this.transform.position = startPos;
@@ -46,8 +48,8 @@ public class Crosshair : MonoBehaviour {
         speed = maxSpeed / 100;
 
         //Store the current horizontal input in the float moveHorizontal.
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = Input.GetAxis("Horizontal_p" + playerId.ToString());
+        float moveVertical = Input.GetAxis("Vertical_p" + playerId.ToString());
         direction = new Vector3(moveHorizontal, moveVertical, 0);
 
         Vector3 tmpPos = transform.position;
@@ -58,7 +60,7 @@ public class Crosshair : MonoBehaviour {
 
     void inputs()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1_p" + playerId.ToString()))
         {
             active = false;
             rend.enabled = false;

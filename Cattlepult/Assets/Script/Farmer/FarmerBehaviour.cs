@@ -16,6 +16,8 @@ public class FarmerBehaviour : MonoBehaviour {
     public GameObject cattlePult;
     private bool aiming = false;
 
+    public int playerId;
+
     private int bellRingTimer;
     private int bellRingTime = 120;
 
@@ -47,8 +49,8 @@ public class FarmerBehaviour : MonoBehaviour {
         speed = maxSpeed / 100;
 
         //Store the current horizontal input in the float moveHorizontal.
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis ("Vertical");
+        float moveHorizontal = Input.GetAxis("Horizontal_p" + playerId.ToString());
+        float moveVertical = Input.GetAxis ("Vertical_p" + playerId.ToString());
         if (moveHorizontal != 0 || moveVertical != 0)
         {
             anim.SetFloat("speed", 1);
@@ -81,13 +83,13 @@ public class FarmerBehaviour : MonoBehaviour {
     void handleInput() {
         bellRingTimer++;
 
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1_p" + playerId.ToString())) {
             if (dontThrow) loadCattlepult();
             else {
                 if (pickedUpCow != null) ejectCow();
                 else pickUpCow();
             }
-        } if (Input.GetButtonDown("Fire2") && bellRingTimer > bellRingTime) {
+        } if (Input.GetButtonDown("Fire2_p" + playerId.ToString()) && bellRingTimer > bellRingTime) {
             ringBell();
             bellRingTimer = 0;
         }

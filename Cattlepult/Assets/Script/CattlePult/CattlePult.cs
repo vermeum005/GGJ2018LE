@@ -13,10 +13,14 @@ public class CattlePult : MonoBehaviour {
     public float maxScale = 1f;
     private Animator anim;
 
+    public int playerId;
+
     // Use this for initialization
     void Start() {
         state = PultState.Empty;
         anim = GetComponent<Animator>();
+        if (playerId == 2)
+            transform.rotation = new Quaternion(0, 180, 0, 0);
     }
 
     // Update is called once per frame
