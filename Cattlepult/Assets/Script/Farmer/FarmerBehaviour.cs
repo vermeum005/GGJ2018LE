@@ -133,7 +133,6 @@ public class FarmerBehaviour : MonoBehaviour {
     }
 
     public void pickUpCow() {
-        Debug.Log(playerId);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, pickUpDist);
         if (hit.collider != null) {
             if (hit.collider.gameObject.CompareTag("Cow") && !hit.collider.gameObject.GetComponent<Collider2D>().isTrigger) {
