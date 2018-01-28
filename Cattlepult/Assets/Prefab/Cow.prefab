@@ -181,8 +181,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bellRingRange: 2
   partSystem: {fileID: 1715212462805730}
+  breedingHeart: {fileID: 1386819036029508, guid: 6339cc8a3868291449427420ed3073a9,
+    type: 2}
   damage: 1
-  deathSpeed: 0.12
   size: 1
   cowPrefab: {fileID: 1047493503429666}
   height: 1
