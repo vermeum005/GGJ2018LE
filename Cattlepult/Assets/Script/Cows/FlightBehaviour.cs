@@ -69,6 +69,17 @@ public class FlightBehaviour : MonoBehaviour {
                 }
             }
         }
+
+        foreach (GameObject Barn in GameObject.FindGameObjectsWithTag("Barn"))
+        {
+            if (GetComponent<Collider2D>().IsTouching(Barn.GetComponent<Collider2D>()))
+            {
+                Barn.GetComponent<House1>().takeDamage(this.gameObject.GetComponent<CowBehaviour>().damage);
+                Destroy(this.gameObject);
+            }
+        }
+        
+            
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
         GetComponent<CowBehaviour>().setAnimationBool(false);
