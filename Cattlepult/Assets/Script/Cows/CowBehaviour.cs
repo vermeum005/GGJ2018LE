@@ -216,6 +216,11 @@ public class CowBehaviour : MonoBehaviour
                 otherCow.state = State.PBreeding;
             }
         }
+        else if (other.gameObject.tag == "Pen")
+        {
+            randomX = Random.Range(-1f, 1f);
+            randomY = Random.Range(-1f, 1f);
+        }
     }
 
     public void pickUpByFarmer()
