@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CowBehaviour : MonoBehaviour
 {
-    enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, inAir, Breeding, PBreeding };
+    enum State { Idle, BreedingIdle, Running, PickUp, CattlePult, inAir, Breeding, PBreeding, Dying};
 
     // Use this for initialization
     private bool isInRightPen;
@@ -27,7 +27,8 @@ public class CowBehaviour : MonoBehaviour
 
     public int damage;
     // Breeding Timer
-    private float breedingTimer = 5; 
+    private float breedingTimer = 5;
+    public float deathSpeed = 0.08f;
 
     // Breeding information
     public int size;
@@ -95,6 +96,10 @@ public class CowBehaviour : MonoBehaviour
             case State.PBreeding:
                 psuedoBreeding();
                 break;
+
+            case State.Dying:
+                runAway();
+                break;
         }
     }
 
@@ -122,6 +127,23 @@ public class CowBehaviour : MonoBehaviour
             }
         }
 
+    }
+
+    public void runAway()
+    {
+        Vector3 dir = new Vector3(1, 0, 0);
+        if (transform.position.x <= 0) {
+            dir *= -1;
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+        } else {
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+        }
+
+        Vector3 pos = transform.position;
+        transform.position = pos + dir * deathSpeed;
+        /* when out of screen */
+        if (Mathf.Abs(transform.position.x) > 50)
+            Destroy(this.gameObject);
     }
 
     public void setIdle()
@@ -162,7 +184,6 @@ public class CowBehaviour : MonoBehaviour
 
     public void setRunning(Vector3 farmerPosition)
     {
-        
         this.farmerPosition = farmerPosition;
         runningVector = position - farmerPosition;
         if (runningVector.magnitude < bellRingRange) {
@@ -283,12 +304,17 @@ public class CowBehaviour : MonoBehaviour
         state = State.CattlePult;
         rend.enabled = false;
     }
+
     public int getSize()
     {
         return size;
     }
+
     public void destroyCow()
     {
-        Destroy(this.gameObject);
+        anim.SetBool("pickUp", false);
+        anim.SetFloat("speed", 1);
+        GetComponent<Collider2D>().isTrigger = true;
+        state = State.Dying;
     }
 }

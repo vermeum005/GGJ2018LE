@@ -68,7 +68,8 @@ public class FlightBehaviour : MonoBehaviour {
                     if (GetComponent<CowBehaviour>().getSize() + 1 >= cow.GetComponent<CowBehaviour>().getSize())
                     {
                         cow.GetComponent<CowBehaviour>().destroyCow();
-                        Destroy(this.gameObject);
+                        GetComponent<CowBehaviour>().destroyCow();
+                        return;
                     }
                 }
             }
@@ -86,7 +87,8 @@ public class FlightBehaviour : MonoBehaviour {
             if (GetComponent<Collider2D>().IsTouching(Barn.GetComponent<Collider2D>()))
             {
                 Barn.GetComponent<House1>().takeDamage(this.gameObject.GetComponent<CowBehaviour>().damage);
-                Destroy(this.gameObject);
+                GetComponent<CowBehaviour>().destroyCow();
+                return;
             }
         }
         
