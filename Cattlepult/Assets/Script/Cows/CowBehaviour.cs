@@ -24,6 +24,8 @@ public class CowBehaviour : MonoBehaviour
     private Animator anim;
 
     public GameObject partSystem;
+
+    public int damage;
     // Breeding Timer
     private float breedingTimer = 5; 
 
@@ -158,11 +160,6 @@ public class CowBehaviour : MonoBehaviour
         anim.SetFloat("speed", 1);
     }
 
-    private void cattlepult()
-    {
-
-    }
-
     public void setRunning(Vector3 farmerPosition)
     {
         
@@ -183,18 +180,23 @@ public class CowBehaviour : MonoBehaviour
         {
             case 1:
                 sizeScale = 1;
+                damage = 1;
                 break;
             case 2:
                 sizeScale = 1.2f;
+                damage = 2;
                 break;
             case 3:
                 sizeScale = 1.5f;
+                damage = 8;
                 break;
             case 4:
                 sizeScale = 1.75f;
+                damage = 20;
                 break;
             case 5:
                 sizeScale = 2f;
+                damage = 50;
                 break;
         }
         float scalemod = transform.localScale.x;
@@ -227,6 +229,7 @@ public class CowBehaviour : MonoBehaviour
     public void droppedByFarmer(Vector3 dir, float dist)
     {
         transform.Find("Shadow").GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<FlightBehaviour>().cattlepulted = false;
         GetComponent<FlightBehaviour>().throwCow(this.transform.position, this.transform.position + (dir * dist), 0, 1f, 1);
     }
 
@@ -279,5 +282,13 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.CattlePult;
         rend.enabled = false;
+    }
+    public int getSize()
+    {
+        return size;
+    }
+    public void destroyCow()
+    {
+        Destroy(this.gameObject);
     }
 }

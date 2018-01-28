@@ -17,6 +17,7 @@ public class FlightBehaviour : MonoBehaviour {
     private Vector3 shadowLocPos;
     private Vector3 shadowLocScale;
     private GameObject shadow;
+    public bool cattlepulted = false;
 
     private void Start()
     {
@@ -58,10 +59,43 @@ public class FlightBehaviour : MonoBehaviour {
     public void landCow()
     {
         GetComponent<Collider2D>().isTrigger = false;
+        if (cattlepulted)
+        {
+            foreach (GameObject cow in GameObject.FindGameObjectsWithTag("Cow"))
+            {
+                if (GetComponent<Collider2D>().IsTouching(cow.GetComponent<Collider2D>()))
+                {
+                    if (GetComponent<CowBehaviour>().getSize() + 1 >= cow.GetComponent<CowBehaviour>().getSize())
+                    {
+                        cow.GetComponent<CowBehaviour>().destroyCow();
+                        Destroy(this.gameObject);
+                    }
+                }
+            }
+            foreach (GameObject farmer in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (GetComponent<Collider2D>().IsTouching(farmer.GetComponent<CircleCollider2D>()))
+                {
+                    farmer.GetComponent<FarmerBehaviour>().stunFarmer(this.gameObject.GetComponent<CowBehaviour>().getSize());
+                }
+            }
+        }
+
+        foreach (GameObject Barn in GameObject.FindGameObjectsWithTag("Barn"))
+        {
+            if (GetComponent<Collider2D>().IsTouching(Barn.GetComponent<Collider2D>()))
+            {
+                Barn.GetComponent<House1>().takeDamage(this.gameObject.GetComponent<CowBehaviour>().damage);
+                Destroy(this.gameObject);
+            }
+        }
+        
+            
         transform.position = target;
         GetComponent<CowBehaviour>().setIdle();
         GetComponent<CowBehaviour>().setAnimationBool(false);
         rend.sortingOrder = 2;
+
     }
 
     public void flyLikeABird()
@@ -85,4 +119,5 @@ public class FlightBehaviour : MonoBehaviour {
             landCow();
         }
     }
+
 }

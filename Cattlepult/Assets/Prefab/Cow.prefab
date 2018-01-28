@@ -181,7 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bellRingRange: 2
   partSystem: {fileID: 1715212462805730}
-  size: 0
+  damage: 1
+  size: 1
   cowPrefab: {fileID: 1047493503429666}
   height: 1
   timeInAir: 2
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6c99b00343170408e2352af23bf7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cattlepulted: 0
 --- !u!198 &198757720303864594
 ParticleSystem:
   m_ObjectHideFlags: 1

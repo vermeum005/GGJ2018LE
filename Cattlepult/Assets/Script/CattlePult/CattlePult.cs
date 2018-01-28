@@ -55,6 +55,7 @@ public class CattlePult : MonoBehaviour {
     {
         anim.SetBool("Loaded", false);
         farmer.GetComponent<FarmerBehaviour>().stopAiming();
+        loadedCow.GetComponent<FlightBehaviour>().cattlepulted = true;
         loadedCow.GetComponent<FlightBehaviour>().throwCow(transform.position, crosspos, throwHeight, airTime, maxScale);
         loadedCow.transform.Find("Shadow").GetComponent<SpriteRenderer>().enabled = true;
     }
