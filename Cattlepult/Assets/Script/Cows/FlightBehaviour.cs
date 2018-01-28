@@ -58,19 +58,19 @@ public class FlightBehaviour : MonoBehaviour {
 
     public void landCow()
     {
-        foreach (GameObject Barn in GameObject.FindGameObjectsWithTag("Barn"))
-        {
-            if (GetComponent<Collider2D>().IsTouching(Barn.GetComponent<Collider2D>()))
-            {
-                Barn.GetComponent<House1>().takeDamage(this.gameObject.GetComponent<CowBehaviour>().damage);
-                GetComponent<CowBehaviour>().destroyCow();
-                return;
-            }
-        }
 
         GetComponent<Collider2D>().isTrigger = false;
         if (cattlepulted)
         {
+            foreach (GameObject Barn in GameObject.FindGameObjectsWithTag("Barn"))
+            {
+                if (GetComponent<Collider2D>().IsTouching(Barn.GetComponent<Collider2D>()))
+                {
+                    Barn.GetComponent<House1>().takeDamage(this.gameObject.GetComponent<CowBehaviour>().damage);
+                    GetComponent<CowBehaviour>().destroyCow();
+                    return;
+                }
+            }
             foreach (GameObject cow in GameObject.FindGameObjectsWithTag("Cow"))
             {
                 if (GetComponent<Collider2D>().IsTouching(cow.GetComponent<Collider2D>()))
