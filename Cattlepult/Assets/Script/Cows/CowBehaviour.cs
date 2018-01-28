@@ -55,7 +55,7 @@ public class CowBehaviour : MonoBehaviour
     {
         state = State.Idle;
         randomWalkingTime = Random.Range(60, 180);
-        
+
         partSystem.GetComponent<ParticleSystem>().Stop();
         randomX = Random.Range(-1f, 1f);
         randomY = Random.Range(-1f, 1f);
@@ -224,8 +224,8 @@ public class CowBehaviour : MonoBehaviour
         if (runningVector.magnitude < bellRingRange) {
             runningTime = (bellRingRange - runningVector.magnitude) * 40;
             runningVector.Normalize();
-            state = State.Running;            
-        }      
+            state = State.Running;
+        }
     }
 
     public void setSize(int newSize)
@@ -271,7 +271,12 @@ public class CowBehaviour : MonoBehaviour
                 state = State.Breeding;
                 otherCow.state = State.PBreeding;
             }
-        }        
+        }
+        else if (other.gameObject.tag == "Pen")
+        {
+            randomX = Random.Range(-1f, 1f);
+            randomY = Random.Range(-1f, 1f);
+        }
     }
 
     public void pickUpByFarmer()
@@ -337,7 +342,7 @@ public class CowBehaviour : MonoBehaviour
             heartOffset = Random.Range(-0.5f, 0.5f);
             Instantiate(breedingHeart, new Vector3(transform.position.x + heartOffset, transform.position.y, transform.position.z), Quaternion.identity);
             heartTimer = 0.5f;
-        } 
+        }
     }
 
     public void setFlying()
