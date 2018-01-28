@@ -24,6 +24,8 @@ public class CowBehaviour : MonoBehaviour
     private Animator anim;
 
     public GameObject partSystem;
+
+    public int damage;
     // Breeding Timer
     private float breedingTimer = 5; 
 
@@ -50,6 +52,7 @@ public class CowBehaviour : MonoBehaviour
         randomY = Random.Range(-1f, 1f);
         rend = GetComponent<Renderer>();
         anim = GetComponent<Animator>();
+        damage = 1;
     }
 
     // Update is called once per frame
@@ -178,18 +181,23 @@ public class CowBehaviour : MonoBehaviour
         {
             case 1:
                 sizeScale = 1;
+                damage = 1;
                 break;
             case 2:
                 sizeScale = 1.2f;
+                damage = 2;
                 break;
             case 3:
                 sizeScale = 1.5f;
+                damage = 8;
                 break;
             case 4:
                 sizeScale = 1.75f;
+                damage = 20;
                 break;
             case 5:
                 sizeScale = 2f;
+                damage = 50;
                 break;
         }
         float scalemod = transform.localScale.x;
