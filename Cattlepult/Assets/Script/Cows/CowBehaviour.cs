@@ -25,6 +25,11 @@ public class CowBehaviour : MonoBehaviour
 
     public GameObject partSystem;
 
+    //breedingHeart stuff
+    public GameObject breedingHeart;
+    private float heartTimer = 0;
+    private float heartOffset;
+
     public int damage;
     // Breeding Timer
     private float breedingTimer = 5; 
@@ -256,11 +261,18 @@ public class CowBehaviour : MonoBehaviour
             timer = 2;
             breedingTimer = 20;
         }
+        if (heartTimer <= 0)
+        {
+            heartOffset = Random.Range(-0.5f, 0.5f);
+            Instantiate(breedingHeart, new Vector3(transform.position.x + heartOffset, transform.position.y, transform.position.z), Quaternion.identity);
+            heartTimer = 0.5f;
+        }
     }
 
     private void realBreeding()
     {
         timer -= Time.deltaTime;
+        heartTimer -= Time.deltaTime;
         if (timer <= 0)
         {
             partSystem.GetComponent<ParticleSystem>().Stop();
@@ -269,6 +281,12 @@ public class CowBehaviour : MonoBehaviour
             breedThemCows(size, otherSize);
             breedingTimer = 20;
         }
+        if (heartTimer <= 0)
+        {
+            heartOffset = Random.Range(-0.5f, 0.5f);
+            Instantiate(breedingHeart, new Vector3(transform.position.x + heartOffset, transform.position.y, transform.position.z), Quaternion.identity);
+            heartTimer = 0.5f;
+        } 
     }
 
     public void setFlying()
